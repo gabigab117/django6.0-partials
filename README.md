@@ -48,4 +48,3 @@ C'est la force de Django 6 : **une seule définition de template** sert aux deux
 2.  Lancez le serveur : `python manage.py runserver`.
 3.  Créez quelques articles via l'admin (`/admin`).
 4.  Sur la page d'accueil, cliquez sur "Charger (HTMX)" pour voir le serveur extraire et renvoyer juste le fragment HTML de l'article.
-# django6.0-partials

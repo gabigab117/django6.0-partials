@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <h2>Liste des articles</h2>
+
+    {# 1. DÉFINITION DU PARTIAL #}
+    {# On définit le bloc réutilisable ici. #}
+    {% partialdef card %}
+        <article>
+            <header>
+                <h3>{{ post.title }}</h3>
+            </header>
+            <p>{{ post.content }}</p>
+            <footer>
+                <a href="{% url 'post_partial' post.pk %}" target="_blank">Lien classique</a>
+                <button 
+                    hx-get="{% url 'post_partial' post.pk %}" 
+                    hx-target="#preview-area"
+                    hx-swap="innerHTML">
+                    Charger (HTMX)
+                </button>
+            </footer>
+        </article>
+    {% endpartialdef %}
+
+    {# 2. ZONE D'APERÇU #}
+    <section>
+        <h3>Zone d'aperçu HTMX</h3>
+        <div id="preview-area">
+            <p><em>Le contenu chargé apparaîtra ici...</em></p>
+        </div>
+    </section>
+
+    <hr>
+
+    {# 3. LISTE #}
+    <section>
+        <h3>Liste des articles</h3>
+        {% for post in posts %}
+            {% partial card %}
+        {% empty %}
+            <p>Aucun article. Ajoutez-en via l'admin !</p>
+        {% endfor %}
+    </section>
+{% endblock %}
