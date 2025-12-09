@@ -13,6 +13,7 @@ Tout se passe dans un seul fichier : `blog/templates/blog/index.html`.
 1.  **Définition Inline** : Un fragment (une "carte" d'article) est défini directement dans `index.html` avec le tag `{% partialdef card %}`.
 2.  **Réutilisation** : Ce même fragment est utilisé pour afficher la liste complète des articles via `{% partial card %}`.
 3.  **Rendu Partiel (HTMX)** : Une vue spécifique rend **uniquement** ce fragment à la demande via l'URL, grâce à la syntaxe `index.html#card`.
+4.  **Inclusion Inter-Template** : Le partial défini dans `index.html` est réutilisé dans un *autre* fichier template (`home.html`) via `{% include "blog/index.html#card" %}`.
 
 ## Comparaison des approches
 
@@ -36,8 +37,10 @@ C'est la force de Django 6 : **une seule définition de template** sert aux deux
 ## Structure
 
 -   **`blog/templates/blog/index.html`** : Contient à la fois la structure de la page ET la définition du partial.
+-   **`blog/templates/blog/home.html`** : Démonstration de l'inclusion d'un partial défini dans un autre fichier.
 -   **`blog/views.py`** :
     -   `index` : Rend la page complète.
+    -   `home` : Rend la page d'accueil qui inclut le partial de `index.html`.
     -   `single_post_partial` : Rend uniquement le partial `#card` pour les requêtes HTMX.
 -   **HTMX** : Utilisé pour charger le partial dynamiquement dans une zone d'aperçu sans recharger la page.
 -   **Simple.css** : Pour le style, sans écrire de CSS personnalisé.

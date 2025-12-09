@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <h1>Page d'accueil</h1>
+    <p>Démonstration de l'inclusion d'un partial défini dans un autre fichier.</p>
+
+    <section>
+        <h2>Article en vedette</h2>
+        {# Inclusion du partial 'card' défini dans blog/index.html #}
+        {% include "blog/index.html#card" %}
+    </section>
+{% endblock %}
